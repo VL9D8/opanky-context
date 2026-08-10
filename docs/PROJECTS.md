@@ -54,7 +54,7 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Complete the bounded owning-repository-to-hub update pilot without publishing private data.
+- Nearest action: Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
 - Last verified: 2026-08-10
 
 ## OPANKY Outreach

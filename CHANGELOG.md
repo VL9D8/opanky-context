@@ -6,7 +6,7 @@ All notable changes to this repository are documented here, following Keep a Cha
 
 ### Changed
 
-- Advanced the nearest roadmap after the verified public V1 release and aligned OPANKY Operator's nearest action with a bounded cross-repository update pilot.
+- Completed the bounded owning-repository-to-hub update pilot and advanced OPANKY Operator's nearest action to model-profile KPI measurement.
 
 ### Added
 
