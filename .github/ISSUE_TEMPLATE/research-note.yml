@@ -1,1 +1,53 @@
-{}
+name: Research note
+description: Propose source-backed research for classification and curation.
+title: "research: "
+labels: [research]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding
+      description: Separate observed facts from inference.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Primary sources
+      description: One public URL per line.
+    validations:
+      required: true
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Confidence
+      options: [high, medium, low]
+    validations:
+      required: true
+  - type: input
+    id: projects
+    attributes:
+      label: Affected project IDs
+      placeholder: ashie-studio, opanky-outreach
+    validations:
+      required: true
+  - type: dropdown
+    id: destination
+    attributes:
+      label: Proposed destination
+      options: [research, current-state, decision, roadmap, project-card]
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-safety confirmation
+      options:
+        - label: This issue contains only material cleared for public publication.
+          required: true

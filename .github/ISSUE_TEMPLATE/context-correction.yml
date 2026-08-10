@@ -1,1 +1,44 @@
-{}
+name: Context correction
+description: Report a public-context claim that is wrong, stale, or missing evidence.
+title: "context: "
+labels: [context-correction]
+body:
+  - type: input
+    id: document
+    attributes:
+      label: Affected canonical document
+      placeholder: docs/CURRENT_STATE.md
+    validations:
+      required: true
+  - type: textarea
+    id: current_claim
+    attributes:
+      label: Current claim
+      description: Quote only the minimum public text needed to identify the claim.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: input
+    id: evidence
+    attributes:
+      label: Public evidence URL
+      description: Leave blank only when owner confirmation is the evidence.
+  - type: input
+    id: verified_at
+    attributes:
+      label: Verification date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-safety confirmation
+      options:
+        - label: This issue contains no secret, private contact, local path, confidential brief, or unpublished asset.
+          required: true

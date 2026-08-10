@@ -1,13 +1,60 @@
-name: Validate
+name: Validate context
 
 on:
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
-  validate:
+  context:
+    name: context
     runs-on: ubuntu-latest
     steps:
-      - run: "true"
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.30"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install locked dependencies
+        run: uv sync --locked
+      - name: Run repository tests
+        run: uv run python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Check generated views
+        run: uv run python scripts/render_context.py --check
+      - name: Validate public context
+        run: uv run python scripts/validate_context.py
+      - name: Validate workflow schema
+        run: uv run check-jsonschema --builtin-schema github-workflows .github/workflows/validate.yml
+
+  links:
+    name: links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Check public and internal links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: --config .lychee.toml --no-progress .
+          fail: true
+
+  secrets:
+    name: secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
