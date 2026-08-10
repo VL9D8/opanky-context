@@ -1,1 +1,15 @@
-Start with README.md and CONTEXT.md, then follow the canonical documents in docs/.
+Relative paths resolve from the repository root.
+
+1. CONTEXT.md
+2. context.json
+3. docs/CURRENT_STATE.md
+4. docs/PROJECTS.md
+5. docs/PORTFOLIO.md
+6. docs/ARCHITECTURE.md
+7. docs/DECISIONS.md
+8. docs/PROCESSES.md
+9. docs/ROADMAP.md
+10. docs/VISION.md
+11. docs/RESEARCH.md
+
+Active project IDs: `ashie-studio`, `opanky-outreach`, `opanky-operator`

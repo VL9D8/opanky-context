@@ -8,4 +8,10 @@ last_verified_at: 2026-08-10
 
 # Research
 
-This repository records the public, verified context of the OPANKY ecosystem.
+## Admission rule
+
+Admit an item only with date, question, finding, sources, confidence, affected project IDs, and accepted destination. Store the result, not copied articles or chat transcripts.
+
+## Index
+
+_No public research entries admitted yet._
