@@ -15,12 +15,12 @@ This view allocates attention; it is not a second task database.
 ## Active focus
 
 - `ashie-studio` — Package the direct and white-label offers for the first twenty-day revenue sprint.
-- `opanky-operator` — Publish this verified context layer without changing the live operator runtime.
+- `opanky-operator` — Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
 
 ## Active
 
 - `ashie-studio` — owner: Alisa; revenue: immediate; verification: partial; next: Package the direct and white-label offers for the first twenty-day revenue sprint.
-- `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Publish this verified context layer without changing the live operator runtime.
+- `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
 - `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Select the canonical integration branch and reconcile the prepared contact batch without sending messages.
 
 ## Next

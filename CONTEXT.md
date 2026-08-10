@@ -24,6 +24,6 @@ Repository evidence outranks chats. Owning repositories and verified behavior ou
 
 ## Immediate milestones
 
-1. Publish and validate this hub.
-2. Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads.
-3. Package Ashie Studio's direct and white-label offers and run the first measurable twenty-day revenue sprint.
+1. Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads.
+2. Package Ashie Studio's direct and white-label offers and run the first measurable twenty-day revenue sprint.
+3. Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
