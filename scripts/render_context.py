@@ -86,7 +86,7 @@ def render_portfolio(context: dict[str, Any]) -> str:
         "",
     ]
     lines.extend(
-        f"- `{project_id}` — {projects[project_id]['nearest_action']}"
+        f"- `{project_id}` \N{EM DASH} {projects[project_id]['nearest_action']}"
         for project_id in context["active_focus"]
     )
     for state in PORTFOLIO_STATES:
@@ -100,7 +100,7 @@ def render_portfolio(context: dict[str, Any]) -> str:
             continue
         for project in matching:
             lines.append(
-                f"- `{project['project_id']}` — owner: {project['owner']}; "
+                f"- `{project['project_id']}` \N{EM DASH} owner: {project['owner']}; "
                 f"revenue: {project['revenue_horizon']}; "
                 f"verification: {project['verification_status']}; "
                 f"next: {project['nearest_action']}"

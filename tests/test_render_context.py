@@ -39,6 +39,8 @@ class RenderContextTests(unittest.TestCase):
             self.assertIn(f"## {heading}", rendered)
         for project_id in self.context["active_focus"]:
             self.assertIn(f"`{project_id}`", rendered)
+        self.assertIn("\N{EM DASH}", rendered)
+        self.assertNotIn("\u00e2\u20ac\u201d", rendered)
 
     def test_generated_files_have_stable_paths_and_trailing_newlines(self) -> None:
         outputs = generated_files(self.context)
