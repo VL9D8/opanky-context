@@ -36,7 +36,11 @@ class NarrativeContractTests(unittest.TestCase):
             metadata = yaml.safe_load(match.group("yaml"))
             self.assertEqual(document["document_id"], metadata["document_id"])
             self.assertEqual(1, metadata["schema_version"])
+            self.assertEqual("OPANKY", metadata["owner"])
             self.assertIn(metadata["status"], {"active", "paused", "archived"})
+            self.assertEqual(
+                self.context["last_verified_at"], str(metadata["last_verified_at"])
+            )
 
     def test_narrative_documents_have_required_sections(self) -> None:
         for relative_path, headings in REQUIRED_HEADINGS.items():

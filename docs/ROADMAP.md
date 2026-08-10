@@ -10,7 +10,7 @@ last_verified_at: 2026-08-10
 
 ## Milestone 1
 
-Publish and validate this hub. Exit when canonical documents, generated views, and repository validation have accepted evidence; no publication is claimed before that evidence exists.
+Publish and validate this hub. Exit when a public repository URL and HTTP 200 entry points are evidenced, all required GitHub checks and branch protection are active, and a fresh AI-read acceptance result is recorded.
 
 ## Milestone 2
 
