@@ -22,7 +22,7 @@ This view allocates attention; it is not a second task database.
 - `ashie-studio` — owner: Alisa; revenue: immediate; verification: partial; next: Package the direct and white-label offers for the first twenty-day revenue sprint.
 - `opanky-content-engine` — owner: Timur; revenue: indirect; verification: partial; next: Collect explicit approve, edit, or reject feedback on the first three manual runs before considering automation.
 - `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
-- `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Review and adopt the verified private integration line without sending messages or changing production.
+- `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Use the accepted private main line for the first measurable revenue sprint without enabling sends or production writes.
 
 ## Next
 
