@@ -69,5 +69,5 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Select the canonical integration branch and reconcile the prepared contact batch without sending messages.
+- Nearest action: Review and adopt the verified private integration line without sending messages or changing production.
 - Last verified: 2026-08-10

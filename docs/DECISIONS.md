@@ -39,3 +39,7 @@ Date: 2026-08-10. Status: accepted. Decision: include no license, site, database
 ## D-008
 
 Date: 2026-08-10. Status: accepted. Decision: keep Daily Work to Content manual, private by default, and separate from publication. Reason: several evidence-backed runs and explicit approve, edit, or reject outcomes are required before automation can be justified.
+
+## D-009
+
+Date: 2026-08-10. Status: accepted. Decision: keep Ashie Studio and Outreach implementation repositories private while exposing only approved public proof and public-safe state through this hub. Reason: source history contains operational details, private evidence boundaries, and assets that have not been approved as a public-source package.
