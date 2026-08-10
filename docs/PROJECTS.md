@@ -69,5 +69,5 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Review and adopt the verified private integration line without sending messages or changing production.
+- Nearest action: Use the accepted private main line for the first measurable revenue sprint without enabling sends or production writes.
 - Last verified: 2026-08-10

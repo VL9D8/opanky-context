@@ -8,9 +8,9 @@ last_verified_at: 2026-08-10
 
 # Roadmap
 
-## Milestone 1
+## Milestone 1 — complete 2026-08-10
 
-Review and adopt the verified private Outreach integration line while preserving the old checkout until owner-work equivalence is accepted. Exit when the owning repository records one accepted local integration line, private contacts remain excluded from public context, and no send or production write is implied.
+The verified private Outreach integration line was accepted on remote `main` through owning-repository PR #2. The old checkout remains preserved until owner-work equivalence is accepted; private contacts remain excluded from public context, and no send or production write is implied.
 
 ## Milestone 2
 
