@@ -1,0 +1,1 @@
+Start with README.md and CONTEXT.md, then follow the canonical documents in docs/.

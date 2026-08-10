@@ -1,0 +1,14 @@
+[project]
+name = "opanky-context-validation"
+version = "0.1.0"
+description = "Validation utilities for the public OPANKY AI context repository"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "jsonschema[format]==4.26.0",
+  "PyYAML==6.0.3",
+]
+
+[dependency-groups]
+dev = [
+  "check-jsonschema==0.37.4",
+]
