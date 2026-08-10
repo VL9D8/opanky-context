@@ -12,7 +12,7 @@ last_verified_at: 2026-08-10
 
 - Ashie Studio has a public proof site at https://ashie.site. Owner: external public site / `ashie-studio`; verified 2026-08-10.
 - `opanky-outreach` and `opanky-operator` have locally verified implementations. Owner: their project repositories; verified 2026-08-10.
-- The public context repository is being bootstrapped. Owner: `opanky-context`; verified 2026-08-10.
+- The public context repository bootstrap is locally complete; public publication not yet verified. Owner: `opanky-context`; verified 2026-08-10.
 - No live outreach send is verified. Owner: `opanky-outreach`; verified 2026-08-10.
 - One client design-production candidate is intentionally unnamed and excluded pending public-safety approval. Owner: private capture; verified 2026-08-10.
 
