@@ -10,12 +10,12 @@ last_verified_at: 2026-08-10
 
 ## Milestone 1
 
-Publish and validate this hub. Exit when a public repository URL and HTTP 200 entry points are evidenced, all required GitHub checks and branch protection are active, and a fresh AI-read acceptance result is recorded.
+Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads. Exit when the ledger and source decision are accepted in the owning `opanky-outreach` repository without exposing private leads.
 
 ## Milestone 2
 
-Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads. Exit when the ledger and source decision are accepted in the owning `opanky-outreach` repository without exposing private leads.
+Package Ashie Studio's direct and white-label offers and run the first measurable twenty-day revenue sprint. Exit when `ashie-studio` records the offer package and measured sprint result.
 
 ## Milestone 3
 
-Package Ashie Studio's direct and white-label offers and run the first measurable twenty-day revenue sprint. Exit when `ashie-studio` records the offer package and measured sprint result. No speculative backlog is maintained here.
+Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives. Exit when one verified change from an owning repository opens a reviewable context pull request, passes the required checks, and publishes no private data. No broader synchronization automation or speculative backlog is maintained here.

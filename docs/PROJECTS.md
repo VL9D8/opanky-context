@@ -39,7 +39,7 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Publish this verified context layer without changing the live operator runtime.
+- Nearest action: Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
 - Last verified: 2026-08-10
 
 ## OPANKY Outreach
