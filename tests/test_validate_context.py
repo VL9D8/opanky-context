@@ -31,6 +31,12 @@ class ValidateContextTests(unittest.TestCase):
             (root / "accidental.txt").write_text(content, encoding="utf-8")
             self.assert_issue_contains(root, expected)
 
+    def assert_public_content_is_allowed(self, content: str) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            (root / "accidental.txt").write_text(content, encoding="utf-8")
+            self.assertEqual([], validate_repository(root))
+
     def test_current_repository_is_valid(self) -> None:
         self.assertEqual([], validate_repository(ROOT))
 
@@ -78,6 +84,16 @@ class ValidateContextTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertEqual([], validate_repository(root))
+
+    def test_dot_relative_path_is_allowed(self) -> None:
+        self.assert_public_content_is_allowed("." + "/" + "docs/file.md")
+
+    def test_parent_relative_path_is_allowed(self) -> None:
+        self.assert_public_content_is_allowed(".." + "/" + "docs/file.md")
+
+    def test_https_query_with_relative_path_is_allowed(self) -> None:
+        url = "https:" + "//" + "example.test/callback?next=/" + "docs"
+        self.assert_public_content_is_allowed(url)
 
     def test_posix_etc_path_is_rejected(self) -> None:
         self.assert_public_content_issue("/" + "etc/passwd", "private local path")

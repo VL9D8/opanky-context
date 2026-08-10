@@ -60,6 +60,8 @@ HTTP_ROUTE = re.compile(
     r"(?i)\b(?:GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\s+/"
     r"(?!/)[A-Za-z0-9._~!$&'()*+,;=:@%/-]*"
 )
+HTTP_URL = re.compile(r"(?i)\bhttps?://[^\s`\"')\]>]+")
+DOT_RELATIVE_PATH = re.compile(r"(?<![A-Za-z0-9._-])\.\.?/(?!/)[^\s`\"')\]>]+")
 LIKELY_SECRET = re.compile(
     r"(?i)\b(?:api[_-]?key|access[_-]?token|password)\s*[:=]\s*"
     r"[\"']?[A-Za-z0-9_./+=-]{12,}"
@@ -99,8 +101,10 @@ def mask_safe_posix_constructs(text: str) -> str:
         target = parts[0] if parts else ""
         return " " * len(match.group(0)) if target.startswith("/") and not target.startswith("//") else match.group(0)
 
-    masked = MARKDOWN_LINK.sub(mask_markdown_link, text)
-    return HTTP_ROUTE.sub(lambda match: " " * len(match.group(0)), masked)
+    masked = HTTP_URL.sub(lambda match: " " * len(match.group(0)), text)
+    masked = MARKDOWN_LINK.sub(mask_markdown_link, masked)
+    masked = HTTP_ROUTE.sub(lambda match: " " * len(match.group(0)), masked)
+    return DOT_RELATIVE_PATH.sub(lambda match: " " * len(match.group(0)), masked)
 
 
 def validate_required_files(root: Path) -> list[str]:
