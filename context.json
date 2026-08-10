@@ -1,1 +1,26 @@
-{}
+{
+  "$schema": "schemas/context.schema.json",
+  "schema_version": 1,
+  "context_id": "opanky-context",
+  "last_verified_at": "2026-08-10",
+  "documents": [
+    {"document_id": "readme", "path": "README.md", "description": "Repository purpose, entry points, scope, and public safety boundary."},
+    {"document_id": "context", "path": "CONTEXT.md", "description": "Smallest complete snapshot needed for an AI to continue current work."},
+    {"document_id": "vision", "path": "docs/VISION.md", "description": "Long-term product direction and decision principles."},
+    {"document_id": "current-state", "path": "docs/CURRENT_STATE.md", "description": "Verified current ecosystem state with unknowns kept explicit."},
+    {"document_id": "architecture", "path": "docs/ARCHITECTURE.md", "description": "Current source-of-truth boundaries and information flow."},
+    {"document_id": "projects", "path": "docs/PROJECTS.md", "description": "Generated public-safe registry of projects and source ownership."},
+    {"document_id": "portfolio", "path": "docs/PORTFOLIO.md", "description": "Generated cross-project attention and revenue-horizon view."},
+    {"document_id": "processes", "path": "docs/PROCESSES.md", "description": "Capture, verification, execution, publication, and learning workflows."},
+    {"document_id": "decisions", "path": "docs/DECISIONS.md", "description": "Append-only public architecture and operating decision record."},
+    {"document_id": "roadmap", "path": "docs/ROADMAP.md", "description": "Only the nearest evidence-backed milestones."},
+    {"document_id": "research", "path": "docs/RESEARCH.md", "description": "Curated source-backed research index without raw conversation dumps."},
+    {"document_id": "build-log", "path": "docs/BUILD_LOG.md", "description": "Public milestone log backed by commits or external evidence."}
+  ],
+  "projects": [
+    {"project_id": "ashie-studio", "display_name": "Ashie Studio", "project_type": "commercial-cluster", "purpose": "Alisa's design studio for branding, graphic design, illustration, direct client work, and white-label production.", "owner": "Alisa", "parent_project_id": null, "portfolio_state": "active", "revenue_horizon": "immediate", "verification_status": "partial", "source_url": "https://ashie.site", "evidence_url": "https://ashie.site", "nearest_action": "Package the direct and white-label offers for the first twenty-day revenue sprint.", "last_verified_at": "2026-08-10"},
+    {"project_id": "opanky-outreach", "display_name": "OPANKY Outreach", "project_type": "workflow", "purpose": "The acquisition workflow that finds, qualifies, and follows up with potential Ashie Studio clients.", "owner": "Timur", "parent_project_id": "ashie-studio", "portfolio_state": "active", "revenue_horizon": "immediate", "verification_status": "partial", "source_url": null, "evidence_url": null, "nearest_action": "Select the canonical integration branch and reconcile the prepared contact batch without sending messages.", "last_verified_at": "2026-08-10"},
+    {"project_id": "opanky-operator", "display_name": "OPANKY Operator", "project_type": "product", "purpose": "A personal AI operator that accepts natural-language goals and coordinates replaceable workers and tools.", "owner": "Timur", "parent_project_id": null, "portfolio_state": "active", "revenue_horizon": "indirect", "verification_status": "partial", "source_url": null, "evidence_url": null, "nearest_action": "Publish this verified context layer without changing the live operator runtime.", "last_verified_at": "2026-08-10"}
+  ],
+  "active_focus": ["ashie-studio", "opanky-operator"]
+}
