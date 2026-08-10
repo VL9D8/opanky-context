@@ -47,6 +47,16 @@ REQUIRED_FORM_IDS = {
     },
 }
 ALLOWED_FORM_TYPES = {"input", "textarea", "dropdown", "checkboxes"}
+EXPECTED_SAFETY_TEXT = {
+    "context-correction.yml": (
+        "no secret",
+        "private contact",
+        "local path",
+        "confidential",
+        "unpublished",
+    ),
+    "research-note.yml": ("cleared for public publication",),
+}
 
 
 class CIConfigurationTests(unittest.TestCase):
@@ -79,6 +89,10 @@ class CIConfigurationTests(unittest.TestCase):
             items_by_id = {item["id"]: item for item in form["body"]}
             for item in form["body"]:
                 self.assertIn(item["type"], ALLOWED_FORM_TYPES, path.name)
+                self.assertIsInstance(item.get("attributes", {}).get("label"), str, item["id"])
+                self.assertTrue(item["attributes"]["label"], item["id"])
+                if item["type"] == "dropdown":
+                    self.assertTrue(item["attributes"].get("options"), item["id"])
             for item_id in REQUIRED_FORM_IDS[path.name]:
                 self.assertTrue(items_by_id[item_id].get("validations", {}).get("required"), item_id)
 
@@ -87,22 +101,29 @@ class CIConfigurationTests(unittest.TestCase):
             options = safety.get("attributes", {}).get("options")
             self.assertIsInstance(options, list)
             self.assertTrue(options)
-            self.assertTrue(all(option.get("required") is True for option in options))
+            for option in options:
+                self.assertIsInstance(option.get("label"), str)
+                self.assertTrue(option["label"])
+                self.assertIs(option.get("required"), True)
+            safety_text = " ".join(option["label"].lower() for option in options)
+            for token in EXPECTED_SAFETY_TEXT[path.name]:
+                self.assertIn(token, safety_text, path.name)
 
     def test_pull_request_template_has_public_context_contract(self) -> None:
-        template = PR_TEMPLATE.read_text(encoding="utf-8")
-        for required_text in (
-            "Affected project/document IDs:",
-            "Source or owner confirmation:",
-            "`last_verified_at`:",
-            "No secrets, private contacts, raw chats, local paths, confidential briefs, or unpublished assets are included.",
-            "Generated views were produced from `context.json`, not edited manually.",
-            "Unknown or partial claims remain explicitly labeled.",
-            '`uv run python -m unittest discover -s tests -p "test_*.py" -v`',
-            "`uv run python scripts/render_context.py --check`",
-            "`uv run python scripts/validate_context.py`",
+        lines = set(PR_TEMPLATE.read_text(encoding="utf-8").splitlines())
+        for required_line in (
+            "- Affected project/document IDs:",
+            "- Source or owner confirmation:",
+            "- `last_verified_at`:",
+            "- Classification: fact / decision / roadmap / research / correction",
+            "- [ ] No secrets, private contacts, raw chats, local paths, confidential briefs, or unpublished assets are included.",
+            "- [ ] Generated views were produced from `context.json`, not edited manually.",
+            "- [ ] Unknown or partial claims remain explicitly labeled.",
+            '- [ ] `uv run python -m unittest discover -s tests -p "test_*.py" -v`',
+            "- [ ] `uv run python scripts/render_context.py --check`",
+            "- [ ] `uv run python scripts/validate_context.py`",
         ):
-            self.assertIn(required_text, template)
+            self.assertIn(required_line, lines)
 
 
 if __name__ == "__main__":
