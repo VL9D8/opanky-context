@@ -25,6 +25,12 @@ class ValidateContextTests(unittest.TestCase):
         issues = validate_repository(root)
         self.assertTrue(any(expected in issue for issue in issues), issues)
 
+    def assert_public_content_issue(self, content: str, expected: str) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            (root / "accidental.txt").write_text(content, encoding="utf-8")
+            self.assert_issue_contains(root, expected)
+
     def test_current_repository_is_valid(self) -> None:
         self.assertEqual([], validate_repository(ROOT))
 
@@ -73,16 +79,34 @@ class ValidateContextTests(unittest.TestCase):
             )
             self.assertEqual([], validate_repository(root))
 
-    def test_posix_local_root_is_rejected(self) -> None:
-        with TemporaryDirectory() as directory:
-            root = self.copy_repository(Path(directory))
-            local_path = "/" + "etc/passwd"
-            wsl_path = "/" + "mnt/c/private.txt"
-            (root / "accidental.txt").write_text(
-                local_path + "\n" + wsl_path,
-                encoding="utf-8",
-            )
-            self.assert_issue_contains(root, "private local path")
+    def test_posix_etc_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "etc/passwd", "private local path")
+
+    def test_posix_applications_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "Applications/App", "private local path")
+
+    def test_posix_library_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "Library/Preferences", "private local path")
+
+    def test_posix_system_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "System/Library", "private local path")
+
+    def test_posix_volumes_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "Volumes/Drive", "private local path")
+
+    def test_arbitrary_posix_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "custom/private", "private local path")
+
+    def test_wsl_path_is_rejected(self) -> None:
+        self.assert_public_content_issue("/" + "mnt/c/private.txt", "private local path")
+
+    def test_posix_file_uri_is_rejected(self) -> None:
+        file_uri = "FiLe:" + "///" + "etc/passwd"
+        self.assert_public_content_issue(file_uri, "file URI")
+
+    def test_windows_file_uri_is_rejected(self) -> None:
+        file_uri = "FILE:" + "///" + "C:" + "/" + "private.txt"
+        self.assert_public_content_issue(file_uri, "file URI")
 
     def test_stale_unmarked_project_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
@@ -261,12 +285,17 @@ class ValidateContextTests(unittest.TestCase):
             )
             self.assert_issue_contains(root, "invalid document owner")
 
-    def test_env_file_variants_are_rejected(self) -> None:
+    def test_uppercase_env_file_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
             root = self.copy_repository(Path(directory))
             (root / ".ENV").write_text("placeholder", encoding="utf-8")
+            self.assertIn("prohibited public file type: .ENV", validate_repository(root))
+
+    def test_env_local_file_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
             (root / ".env.local").write_text("placeholder", encoding="utf-8")
-            self.assert_issue_contains(root, "prohibited public file type")
+            self.assertIn("prohibited public file type: .env.local", validate_repository(root))
 
     def test_two_node_parent_cycle_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:

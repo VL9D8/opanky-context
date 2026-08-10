@@ -52,11 +52,13 @@ WINDOWS_ABSOLUTE_PATH = re.compile(
     + BACKSLASH
     + r"[^\\/\s]+[\\/][^\s]+)"
 )
-POSIX_LOCAL_PATH = re.compile(
-    r"(?<![:A-Za-z0-9/])/"
-    r"(?:bin|dev|etc|home|lib(?:64)?|mnt|opt|private|proc|root|run|sbin|srv|sys|tmp|usr|var|Users)"
-    r"(?:/|$)",
-    re.IGNORECASE,
+FILE_URI = re.compile(r"(?i)\b" + "file" + r":/+[^\s`\"')\]>]+")
+POSIX_ABSOLUTE_PATH = re.compile(
+    r"(?<![:A-Za-z0-9/])/(?!/)[A-Za-z0-9._~][^\s`\"')\]>]*"
+)
+HTTP_ROUTE = re.compile(
+    r"(?i)\b(?:GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\s+/"
+    r"(?!/)[A-Za-z0-9._~!$&'()*+,;=:@%/-]*"
 )
 LIKELY_SECRET = re.compile(
     r"(?i)\b(?:api[_-]?key|access[_-]?token|password)\s*[:=]\s*"
@@ -89,6 +91,16 @@ def is_safe_relative_path(root: Path, relative_path: object) -> bool:
     if WINDOWS_ABSOLUTE_PATH.search(relative_path) or relative_path.startswith("\\\\"):
         return False
     return is_within_root(root / relative_path, root)
+
+
+def mask_safe_posix_constructs(text: str) -> str:
+    def mask_markdown_link(match: re.Match[str]) -> str:
+        parts = match.group("target").strip().split()
+        target = parts[0] if parts else ""
+        return " " * len(match.group(0)) if target.startswith("/") and not target.startswith("//") else match.group(0)
+
+    masked = MARKDOWN_LINK.sub(mask_markdown_link, text)
+    return HTTP_ROUTE.sub(lambda match: " " * len(match.group(0)), masked)
 
 
 def validate_required_files(root: Path) -> list[str]:
@@ -331,7 +343,11 @@ def validate_public_boundary(root: Path) -> list[str]:
             continue
         if LIKELY_SECRET.search(text):
             issues.append(f"likely secret: {relative_path}")
-        if WINDOWS_ABSOLUTE_PATH.search(text) or POSIX_LOCAL_PATH.search(text):
+        if FILE_URI.search(text):
+            issues.append(f"file URI: {relative_path}")
+        if WINDOWS_ABSOLUTE_PATH.search(text) or POSIX_ABSOLUTE_PATH.search(
+            mask_safe_posix_constructs(text)
+        ):
             issues.append(f"private local path: {relative_path}")
     return issues
 
