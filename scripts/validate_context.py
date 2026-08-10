@@ -52,8 +52,11 @@ WINDOWS_ABSOLUTE_PATH = re.compile(
     + BACKSLASH
     + r"[^\\/\s]+[\\/][^\s]+)"
 )
-POSIX_ABSOLUTE_PATH = re.compile(
-    r"(?<![:A-Za-z0-9/])/(?!/)[A-Za-z0-9._-][^\s`\"')\]>]*"
+POSIX_LOCAL_PATH = re.compile(
+    r"(?<![:A-Za-z0-9/])/"
+    r"(?:bin|dev|etc|home|lib(?:64)?|mnt|opt|private|proc|root|run|sbin|srv|sys|tmp|usr|var|Users)"
+    r"(?:/|$)",
+    re.IGNORECASE,
 )
 LIKELY_SECRET = re.compile(
     r"(?i)\b(?:api[_-]?key|access[_-]?token|password)\s*[:=]\s*"
@@ -66,17 +69,18 @@ def public_files(root: Path) -> list[Path]:
     return sorted(
         path
         for path in root.rglob("*")
-        if path.is_file() and not IGNORED_PARTS.intersection(path.relative_to(root).parts)
+        if (path.is_file() or path.is_symlink())
+        and not IGNORED_PARTS.intersection(path.relative_to(root).parts)
     )
 
 
 def is_within_root(path: Path, root: Path) -> bool:
     try:
-        path.resolve().is_relative_to(root.resolve())
+        resolved_path = path.resolve()
+        resolved_root = root.resolve()
     except (OSError, RuntimeError):
         return False
-    else:
-        return path.resolve().is_relative_to(root.resolve())
+    return resolved_path.is_relative_to(resolved_root)
 
 
 def is_safe_relative_path(root: Path, relative_path: object) -> bool:
@@ -141,6 +145,9 @@ def validate_documents(root: Path, context: dict[str, Any]) -> list[str]:
             issues.append(f"document path escapes repository: {relative_path}")
             continue
         path = root / relative_path
+        if path.is_symlink():
+            issues.append(f"document path is a symlink: {relative_path}")
+            continue
         if not path.is_file():
             issues.append(f"document path does not exist: {relative_path}")
             continue
@@ -155,6 +162,8 @@ def validate_documents(root: Path, context: dict[str, Any]) -> list[str]:
             continue
         if metadata.get("document_id") != document_id:
             issues.append(f"document_id mismatch: {relative_path}")
+        if metadata.get("owner") != "OPANKY":
+            issues.append(f"invalid document owner: {relative_path}")
         if str(metadata.get("schema_version")) != str(context.get("schema_version")):
             issues.append(f"schema_version mismatch: {relative_path}")
         if metadata.get("status") not in allowed_statuses:
@@ -238,6 +247,9 @@ def validate_ai_references(root: Path, context: dict[str, Any]) -> list[str]:
         if not is_safe_relative_path(root, relative_path):
             issues.append(f"required file escapes repository: {relative_path}")
             continue
+        if (root / relative_path).is_symlink():
+            issues.append(f"required file is a symlink: {relative_path}")
+            continue
         text = (root / relative_path).read_text(encoding="utf-8")
         for project in context.get("projects", []):
             if not isinstance(project, dict):
@@ -255,6 +267,9 @@ def validate_generated_views(root: Path, context: dict[str, Any]) -> list[str]:
             issues.append(f"generated file escapes repository: {relative_path}")
             continue
         path = root / relative_path
+        if path.is_symlink():
+            issues.append(f"generated file is a symlink: {relative_path}")
+            continue
         actual = path.read_text(encoding="utf-8") if path.exists() else None
         if actual != expected:
             issues.append(f"generated file is stale: {relative_path}")
@@ -266,6 +281,9 @@ def validate_internal_links(root: Path) -> list[str]:
     candidates = [path for path in public_files(root) if path.suffix == ".md"]
     candidates.append(root / "llms.txt")
     for source in candidates:
+        if source.is_symlink():
+            issues.append(f"prohibited public symlink: {source.relative_to(root)}")
+            continue
         if not is_within_root(source, root):
             issues.append(f"public file escapes repository: {source.relative_to(root)}")
             continue
@@ -290,13 +308,21 @@ def validate_public_boundary(root: Path) -> list[str]:
     issues: list[str] = []
     for path in public_files(root):
         relative_path = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            issues.append(f"prohibited public symlink: {relative_path}")
+            continue
         if not is_within_root(path, root):
             issues.append(f"public file escapes repository: {relative_path}")
             continue
         size = path.stat().st_size
         if size > MAX_PUBLIC_FILE_BYTES:
             issues.append(f"{relative_path} exceeds {MAX_PUBLIC_FILE_BYTES} bytes")
-        if path.suffix.lower() in PROHIBITED_SUFFIXES or path.name == ".env":
+        name_lower = path.name.lower()
+        if (
+            path.suffix.lower() in PROHIBITED_SUFFIXES
+            or name_lower == ".env"
+            or name_lower.startswith(".env.")
+        ):
             issues.append(f"prohibited public file type: {relative_path}")
         try:
             text = path.read_text(encoding="utf-8")
@@ -305,7 +331,7 @@ def validate_public_boundary(root: Path) -> list[str]:
             continue
         if LIKELY_SECRET.search(text):
             issues.append(f"likely secret: {relative_path}")
-        if WINDOWS_ABSOLUTE_PATH.search(text) or POSIX_ABSOLUTE_PATH.search(text):
+        if WINDOWS_ABSOLUTE_PATH.search(text) or POSIX_LOCAL_PATH.search(text):
             issues.append(f"private local path: {relative_path}")
     return issues
 
@@ -318,6 +344,8 @@ def validate_repository(root: Path) -> list[str]:
     schema: dict[str, Any] | None = None
     if not context_path.is_file():
         issues.append("missing context.json")
+    elif context_path.is_symlink():
+        issues.append("context.json is a symlink")
     elif not is_within_root(context_path, root):
         issues.append("context.json escapes repository")
     else:
@@ -327,6 +355,8 @@ def validate_repository(root: Path) -> list[str]:
             issues.append(f"cannot parse context.json: {error}")
     if not schema_path.is_file():
         issues.append("missing context schema")
+    elif schema_path.is_symlink():
+        issues.append("context schema is a symlink")
     elif not is_within_root(schema_path, root):
         issues.append("context schema escapes repository")
     else:

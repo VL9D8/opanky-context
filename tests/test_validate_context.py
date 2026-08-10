@@ -17,7 +17,7 @@ class ValidateContextTests(unittest.TestCase):
         shutil.copytree(
             ROOT,
             copied,
-            ignore=shutil.ignore_patterns(".git", ".venv", "__pycache__"),
+            ignore=shutil.ignore_patterns(".git", ".uv-cache", ".venv", "__pycache__"),
         )
         return copied
 
@@ -52,6 +52,37 @@ class ValidateContextTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assert_issue_contains(root, "broken internal link")
+
+    def test_root_relative_repository_link_is_allowed(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            readme = root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8") + "\n[Docs](/docs/PROJECTS.md)\n",
+                encoding="utf-8",
+            )
+            self.assertEqual([], validate_repository(root))
+
+    def test_route_text_is_allowed(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            readme = root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8") + "\nRoute: GET /api/items\n",
+                encoding="utf-8",
+            )
+            self.assertEqual([], validate_repository(root))
+
+    def test_posix_local_root_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            local_path = "/" + "etc/passwd"
+            wsl_path = "/" + "mnt/c/private.txt"
+            (root / "accidental.txt").write_text(
+                local_path + "\n" + wsl_path,
+                encoding="utf-8",
+            )
+            self.assert_issue_contains(root, "private local path")
 
     def test_stale_unmarked_project_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
@@ -155,18 +186,42 @@ class ValidateContextTests(unittest.TestCase):
             context_path.write_text(json.dumps(context, indent=2) + "\n", encoding="utf-8")
             self.assert_issue_contains(root, "document path escapes repository")
 
-    def test_external_file_symlink_is_rejected(self) -> None:
+    def test_live_file_symlink_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
             temporary_root = Path(directory)
             root = self.copy_repository(temporary_root)
-            outside = temporary_root / "outside.txt"
-            outside.write_text("outside", encoding="utf-8")
+            target = root / "target.txt"
+            target.write_text("target", encoding="utf-8")
             link = root / "linked.txt"
             try:
-                os.symlink(outside, link)
+                os.symlink(target, link)
             except OSError as error:
                 self.skipTest(f"symlinks unavailable: {error}")
-            self.assert_issue_contains(root, "public file escapes repository")
+            self.assert_issue_contains(root, "prohibited public symlink")
+
+    def test_broken_symlink_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            root = self.copy_repository(temporary_root)
+            link = root / "broken.txt"
+            try:
+                os.symlink(temporary_root / "missing.txt", link)
+            except OSError as error:
+                self.skipTest(f"symlinks unavailable: {error}")
+            self.assert_issue_contains(root, "prohibited public symlink")
+
+    def test_directory_symlink_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            root = self.copy_repository(temporary_root)
+            target = root / "target-directory"
+            target.mkdir()
+            link = root / "linked-directory"
+            try:
+                os.symlink(target, link, target_is_directory=True)
+            except OSError as error:
+                self.skipTest(f"symlinks unavailable: {error}")
+            self.assert_issue_contains(root, "prohibited public symlink")
 
     def test_invalid_front_matter_date_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
@@ -181,6 +236,37 @@ class ValidateContextTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assert_issue_contains(root, "invalid document verification date")
+
+    def test_missing_front_matter_owner_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            readme = root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8").replace("owner: OPANKY\n", "", 1),
+                encoding="utf-8",
+            )
+            self.assert_issue_contains(root, "invalid document owner")
+
+    def test_wrong_front_matter_owner_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            readme = root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8").replace(
+                    "owner: OPANKY",
+                    "owner: OTHER",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            self.assert_issue_contains(root, "invalid document owner")
+
+    def test_env_file_variants_are_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = self.copy_repository(Path(directory))
+            (root / ".ENV").write_text("placeholder", encoding="utf-8")
+            (root / ".env.local").write_text("placeholder", encoding="utf-8")
+            self.assert_issue_contains(root, "prohibited public file type")
 
     def test_two_node_parent_cycle_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:
