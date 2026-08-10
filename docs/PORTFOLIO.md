@@ -15,12 +15,13 @@ This view allocates attention; it is not a second task database.
 ## Active focus
 
 - `ashie-studio` — Package the direct and white-label offers for the first twenty-day revenue sprint.
-- `opanky-operator` — Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
+- `opanky-operator` — Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
 
 ## Active
 
 - `ashie-studio` — owner: Alisa; revenue: immediate; verification: partial; next: Package the direct and white-label offers for the first twenty-day revenue sprint.
-- `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
+- `opanky-content-engine` — owner: Timur; revenue: indirect; verification: partial; next: Collect explicit approve, edit, or reject feedback on the first three manual runs before considering automation.
+- `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
 - `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Select the canonical integration branch and reconcile the prepared contact batch without sending messages.
 
 ## Next

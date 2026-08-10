@@ -19,3 +19,7 @@ Propagate verified changes to the owning repository and this hub as needed. Corr
 ## AI consumption
 
 AI reads `CONTEXT.md`, `context.json`, and the relevant canonical document before proposing changes. AI output is a proposal until backed by a public source, repository evidence, test, or explicit owner confirmation.
+
+## Daily Work to Content
+
+Collect only verified, publication-safe evidence from owning repositories. Apply a privacy review, rank ideas on novelty, specificity, usefulness, evidence, and relevance, then create reviewable drafts. Record only explicit approve, edit, or reject feedback. Publication and scheduling are separate owner-authorized actions; no automatic publisher or learning loop is part of the current workflow.

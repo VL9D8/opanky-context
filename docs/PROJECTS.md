@@ -27,6 +27,21 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Nearest action: Package the direct and white-label offers for the first twenty-day revenue sprint.
 - Last verified: 2026-08-10
 
+## OPANKY Content Engine
+
+- `project_id`: `opanky-content-engine`
+- Type: workflow
+- Purpose: A private-by-default manual workflow that turns verified daily work into reviewable content drafts and structured feedback without automatic publication.
+- Owner: Timur
+- Parent project: Not published
+- Portfolio state: active
+- Revenue horizon: indirect
+- Verification status: partial
+- Source: Not published
+- Evidence: Not published
+- Nearest action: Collect explicit approve, edit, or reject feedback on the first three manual runs before considering automation.
+- Last verified: 2026-08-10
+
 ## OPANKY Operator
 
 - `project_id`: `opanky-operator`
@@ -39,7 +54,7 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
+- Nearest action: Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
 - Last verified: 2026-08-10
 
 ## OPANKY Outreach

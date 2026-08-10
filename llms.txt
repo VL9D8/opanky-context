@@ -13,4 +13,4 @@ Relative paths resolve from the repository root.
 11. docs/RESEARCH.md
 
 Canonical active-focus IDs: `ashie-studio`, `opanky-operator`
-Related active workflow: `opanky-outreach` (Ashie Studio acquisition; not a top-level active focus)
+Related active workflows: `opanky-outreach` (Ashie Studio acquisition) and `opanky-content-engine` (manual evidence-to-drafts); neither is a top-level active focus.

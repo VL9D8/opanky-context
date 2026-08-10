@@ -16,9 +16,10 @@ OPANKY is developing a personal-AI product direction: natural-language work is r
 - `ashie-studio` — active commercial focus; repository registry evidence, verified 2026-08-10.
 - `opanky-operator` — active product focus; locally verified implementation, Partial public status, verified 2026-08-10.
 
-## Related active workflow
+## Related active workflows
 
 - `opanky-outreach` — an Ashie Studio acquisition workflow; locally verified implementation, Partial public status, verified 2026-08-10.
+- `opanky-content-engine` — a manual evidence-to-drafts workflow; three local runs are verified, all feedback is pending, and no publication automation exists, verified 2026-08-10.
 
 Repository evidence outranks chats. Owning repositories and verified behavior outrank this hub for code and runtime claims.
 
@@ -26,4 +27,5 @@ Repository evidence outranks chats. Owning repositories and verified behavior ou
 
 1. Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads.
 2. Package Ashie Studio's direct and white-label offers and run the first measurable twenty-day revenue sprint.
-3. Prove one bounded owning-repository-to-hub update workflow using existing GitHub primitives without publishing private data.
+3. Bounded owning-repository-to-hub update pilot — complete through [PR #3](https://github.com/VL9D8/opanky-context/pull/3); all required checks passed and no private data was published.
+4. Review the first three manual Content Engine runs and record explicit approve, edit, or reject outcomes before considering automation.

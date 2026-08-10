@@ -15,3 +15,5 @@ This hub owns cross-project public context. Each project repository owns code an
 ## Boundaries
 
 Private capture -> curated change -> public hub -> owning project repositories. The hub summarizes verified public context; it does not replace source repositories or external asset owners.
+
+Verified owning-repository evidence may also enter the private-by-default Content Engine, where a privacy review, ranked ideas, drafts, and explicit feedback remain separate from publication. The public hub records only safe project-level state; it does not store private drafts or source material. Publication remains a separately authorized action.
