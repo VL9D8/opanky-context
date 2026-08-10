@@ -20,6 +20,7 @@ last_verified_at: 2026-08-10
 - Branch protection: strict required checks `context`, `links`, and `secrets`; force pushes and deletion disabled; conversation resolution required.
 - Fresh AI-read acceptance: PASS on 2026-08-10 using a browsing-capable ChatGPT Temporary Chat with only https://github.com/VL9D8/opanky-context as the public entry URL.
 - Acceptance correction: clarified that canonical `active_focus` contains only `ashie-studio` and `opanky-operator`; `opanky-outreach` is a related Ashie Studio acquisition workflow.
+- Manual Content Engine pilot: three source-backed local runs created nine reviewable draft outcomes; all remain pending and no content was published or scheduled.
 
 - Approved design — evidence: explicit owner-approved design for the public context contract. Status: accepted and published.
 - Public V1 — evidence: protected GitHub branch, successful required checks, unauthenticated HTTP 200 entry points, and fresh AI-read acceptance. Status: verified public.

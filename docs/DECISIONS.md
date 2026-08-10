@@ -35,3 +35,7 @@ Date: 2026-08-10. Status: accepted. Decision: enforce a public/private boundary.
 ## D-007
 
 Date: 2026-08-10. Status: accepted. Decision: include no license, site, database, vector store, model provider, Pydantic runtime, or paid API in V1. Reason: V1 needs a compact, deterministic public context contract before optional infrastructure.
+
+## D-008
+
+Date: 2026-08-10. Status: accepted. Decision: keep Daily Work to Content manual, private by default, and separate from publication. Reason: several evidence-backed runs and explicit approve, edit, or reject outcomes are required before automation can be justified.

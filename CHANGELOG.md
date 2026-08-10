@@ -8,6 +8,10 @@ All notable changes to this repository are documented here, following Keep a Cha
 
 - Advanced the nearest roadmap after the verified public V1 release and aligned OPANKY Operator's nearest action with a bounded cross-repository update pilot.
 
+### Added
+
+- Registered the manual, private-by-default OPANKY Content Engine and its explicit no-publication boundary.
+
 ## [0.1.0] - 2026-08-10
 
 ### Added

@@ -24,12 +24,22 @@ class ContextContractTests(unittest.TestCase):
     def test_initial_registry_contains_safe_verified_scope(self) -> None:
         projects = {item["project_id"]: item for item in self.context["projects"]}
         self.assertEqual(
-            {"ashie-studio", "opanky-outreach", "opanky-operator"},
+            {
+                "ashie-studio",
+                "opanky-content-engine",
+                "opanky-outreach",
+                "opanky-operator",
+            },
             set(projects),
         )
         self.assertEqual("ashie-studio", projects["opanky-outreach"]["parent_project_id"])
         self.assertIsNone(projects["opanky-outreach"]["source_url"])
         self.assertIsNone(projects["opanky-operator"]["source_url"])
+        self.assertIsNone(projects["opanky-content-engine"]["source_url"])
+        self.assertIn(
+            "without automatic publication",
+            projects["opanky-content-engine"]["purpose"],
+        )
         self.assertNotIn("cliffora", projects)
 
     def test_active_focus_contains_only_top_level_projects(self) -> None:
