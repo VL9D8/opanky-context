@@ -10,7 +10,7 @@ last_verified_at: 2026-08-10
 
 ## Milestone 1
 
-Create the owning Outreach integration ledger, choose its canonical branch/source, and separate private leads. Exit when the ledger and source decision are accepted in the owning `opanky-outreach` repository without exposing private leads.
+Review and adopt the verified private Outreach integration line while preserving the old checkout until owner-work equivalence is accepted. Exit when the owning repository records one accepted local integration line, private contacts remain excluded from public context, and no send or production write is implied.
 
 ## Milestone 2
 
