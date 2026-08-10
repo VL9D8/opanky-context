@@ -15,6 +15,11 @@ last_verified_at: 2026-08-10
 - Narrative milestone: commit `e1b69e4` (`docs: establish public ecosystem context`).
 - Validator milestone: commit `85f01d9` (`feat: validate public context safety and consistency`).
 - CI milestone: commit `8c46805` (`ci: enforce public context quality gates`).
+- Public publication: https://github.com/VL9D8/opanky-context at commit `202262343542b38f6975481b9b02eaa87c73f316`.
+- First successful GitHub Actions validation: https://github.com/VL9D8/opanky-context/actions/runs/31388916968; `context`, `links`, and `secrets` passed.
+- Branch protection: strict required checks `context`, `links`, and `secrets`; force pushes and deletion disabled; conversation resolution required.
+- Fresh AI-read acceptance: PASS on 2026-08-10 using a browsing-capable ChatGPT Temporary Chat with only https://github.com/VL9D8/opanky-context as the public entry URL.
+- Acceptance correction: clarified that canonical `active_focus` contains only `ashie-studio` and `opanky-operator`; `opanky-outreach` is a related Ashie Studio acquisition workflow.
 
-- Approved design — evidence: explicit owner-approved design for the public context contract. Status: accepted locally; GitHub publication is not claimed.
-- Local bootstrap — evidence: local repository implementation and validation. Status: local; GitHub publication is not claimed.
+- Approved design — evidence: explicit owner-approved design for the public context contract. Status: accepted and published.
+- Public V1 — evidence: protected GitHub branch, successful required checks, unauthenticated HTTP 200 entry points, and fresh AI-read acceptance. Status: verified public.

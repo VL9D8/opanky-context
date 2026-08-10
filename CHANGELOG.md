@@ -4,9 +4,15 @@ All notable changes to this repository are documented here, following Keep a Cha
 
 ## [Unreleased]
 
-- Local validation contract covers repository, schema, renderer, narrative, validator-negative, and CI-configuration checks.
-- Public-context quality-gate automation covers generated-view, validation, workflow-schema, and whitespace checks.
+## [0.1.0] - 2026-08-10
 
-## Added
+### Added
 
-- Local V1 public context contract: registry, canonical documents, generated views, and validation. Publication is not yet claimed.
+- Public V1 context contract: registry, canonical documents, generated views, and validation.
+- Quality-gate automation for repository tests, generated views, context validation, workflow schema, links, and secret scanning.
+- Protected public `main` branch with required `context`, `links`, and `secrets` checks.
+- Verified public AI entry points and fresh AI-read acceptance evidence.
+
+### Changed
+
+- Clarified the distinction between canonical active-focus projects and the related OPANKY Outreach workflow.

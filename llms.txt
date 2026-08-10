@@ -12,4 +12,5 @@ Relative paths resolve from the repository root.
 10. docs/VISION.md
 11. docs/RESEARCH.md
 
-Active project IDs: `ashie-studio`, `opanky-outreach`, `opanky-operator`
+Canonical active-focus IDs: `ashie-studio`, `opanky-operator`
+Related active workflow: `opanky-outreach` (Ashie Studio acquisition; not a top-level active focus)

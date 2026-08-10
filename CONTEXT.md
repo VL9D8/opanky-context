@@ -12,8 +12,12 @@ OPANKY is developing a personal-AI product direction: natural-language work is r
 
 ## Active focus
 
+- Canonical `active_focus` contains only the following project IDs:
 - `ashie-studio` — active commercial focus; repository registry evidence, verified 2026-08-10.
 - `opanky-operator` — active product focus; locally verified implementation, Partial public status, verified 2026-08-10.
+
+## Related active workflow
+
 - `opanky-outreach` — an Ashie Studio acquisition workflow; locally verified implementation, Partial public status, verified 2026-08-10.
 
 Repository evidence outranks chats. Owning repositories and verified behavior outrank this hub for code and runtime claims.
