@@ -3,7 +3,7 @@ schema_version: 1
 document_id: projects
 owner: OPANKY
 status: active
-last_verified_at: 2026-08-10
+last_verified_at: 2026-08-13
 ---
 
 <!-- Generated from context.json by scripts/render_context.py; do not edit directly. -->
@@ -24,8 +24,8 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: https://ashie.site
 - Evidence: https://ashie.site
-- Nearest action: Package the direct and white-label offers for the first twenty-day revenue sprint.
-- Last verified: 2026-08-10
+- Nearest action: Choose and run the smallest measurable path to the first paid order before expanding supporting automation.
+- Last verified: 2026-08-13
 
 ## OPANKY Content Engine
 
@@ -64,10 +64,10 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Purpose: The acquisition workflow that finds, qualifies, and follows up with potential Ashie Studio clients.
 - Owner: Timur
 - Parent project: ashie-studio
-- Portfolio state: active
+- Portfolio state: paused
 - Revenue horizon: immediate
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Use the accepted private main line for the first measurable revenue sprint without enabling sends or production writes.
-- Last verified: 2026-08-10
+- Nearest action: Review the commercial strategy and select a minimal measurable acquisition pilot; do not activate the unaccepted sender automation.
+- Last verified: 2026-08-13

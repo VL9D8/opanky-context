@@ -269,7 +269,7 @@ class ValidateContextTests(unittest.TestCase):
             readme = root / "README.md"
             readme.write_text(
                 readme.read_text(encoding="utf-8").replace(
-                    "last_verified_at: 2026-08-10",
+                    "last_verified_at: 2026-08-13",
                     "last_verified_at: 2026-99-99",
                     1,
                 ),
