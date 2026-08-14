@@ -3,7 +3,7 @@ schema_version: 1
 document_id: portfolio
 owner: OPANKY
 status: active
-last_verified_at: 2026-08-10
+last_verified_at: 2026-08-14
 ---
 
 <!-- Generated from context.json by scripts/render_context.py; do not edit directly. -->
@@ -14,15 +14,13 @@ This view allocates attention; it is not a second task database.
 
 ## Active focus
 
-- `ashie-studio` — Package the direct and white-label offers for the first twenty-day revenue sprint.
-- `opanky-operator` — Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
+- `ashie-studio` — Run a bounded manual pilot of the one-week white-label offer with Russian-speaking agencies and record the first paid-order result.
 
 ## Active
 
-- `ashie-studio` — owner: Alisa; revenue: immediate; verification: partial; next: Package the direct and white-label offers for the first twenty-day revenue sprint.
+- `ashie-studio` — owner: Alisa; revenue: immediate; verification: partial; next: Run a bounded manual pilot of the one-week white-label offer with Russian-speaking agencies and record the first paid-order result.
 - `opanky-content-engine` — owner: Timur; revenue: indirect; verification: partial; next: Collect explicit approve, edit, or reject feedback on the first three manual runs before considering automation.
 - `opanky-operator` — owner: Timur; revenue: indirect; verification: partial; next: Measure model-profile suitability across quality, cost, and time while preserving Codex-first routing.
-- `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Use the accepted private main line for the first measurable revenue sprint without enabling sends or production writes.
 
 ## Next
 
@@ -34,7 +32,7 @@ _None registered._
 
 ## Paused
 
-_None registered._
+- `opanky-outreach` — owner: Timur; revenue: immediate; verification: partial; next: Define the manual agency pilot channel, sample size, success metric, and stopping rule; do not activate the unaccepted sender automation.
 
 ## Archived
 
