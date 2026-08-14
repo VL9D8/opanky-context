@@ -3,7 +3,7 @@ schema_version: 1
 document_id: research
 owner: OPANKY
 status: active
-last_verified_at: 2026-08-13
+last_verified_at: 2026-08-14
 ---
 
 # Research

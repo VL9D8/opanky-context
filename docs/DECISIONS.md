@@ -3,7 +3,7 @@ schema_version: 1
 document_id: decisions
 owner: OPANKY
 status: active
-last_verified_at: 2026-08-13
+last_verified_at: 2026-08-14
 ---
 
 # Decisions
@@ -47,3 +47,7 @@ Date: 2026-08-10. Status: accepted. Decision: keep Ashie Studio and Outreach imp
 ## D-010
 
 Date: 2026-08-13. Status: accepted. Decision: pause expansion and activation of Outreach automation while the commercial strategy is reviewed. Preserve the private experiment, but do not treat green tests as production acceptance or activate it while critical review findings remain unresolved. Reason: the primary objective is the first paid Ashie Studio order, and tooling should follow evidence from a measurable sales loop rather than precede it.
+
+## D-011
+
+Date: 2026-08-14. Status: accepted. Decision: test one price-free, one-week white-label offer with Russian-speaking agencies before changing the Ashie Studio offer again or expanding Outreach automation. Reason: a bounded agency pilot gives the first-order objective a concrete offer and buyer segment while keeping channel and workflow decisions evidence-gated.

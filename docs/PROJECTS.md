@@ -3,7 +3,7 @@ schema_version: 1
 document_id: projects
 owner: OPANKY
 status: active
-last_verified_at: 2026-08-13
+last_verified_at: 2026-08-14
 ---
 
 <!-- Generated from context.json by scripts/render_context.py; do not edit directly. -->
@@ -24,8 +24,8 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: https://ashie.site
 - Evidence: https://ashie.site
-- Nearest action: Choose and run the smallest measurable path to the first paid order before expanding supporting automation.
-- Last verified: 2026-08-13
+- Nearest action: Run a bounded manual pilot of the one-week white-label offer with Russian-speaking agencies and record the first paid-order result.
+- Last verified: 2026-08-14
 
 ## OPANKY Content Engine
 
@@ -69,5 +69,5 @@ This is the public-safe registry. Unknown or private source locations are not gu
 - Verification status: partial
 - Source: Not published
 - Evidence: Not published
-- Nearest action: Review the commercial strategy and select a minimal measurable acquisition pilot; do not activate the unaccepted sender automation.
-- Last verified: 2026-08-13
+- Nearest action: Define the manual agency pilot channel, sample size, success metric, and stopping rule; do not activate the unaccepted sender automation.
+- Last verified: 2026-08-14
